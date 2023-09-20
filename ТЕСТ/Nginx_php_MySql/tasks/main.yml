@@ -39,3 +39,8 @@
   shell:
     cmd: "docker compose up -d"
     chdir: "{{ work_dir }}"
+
+- name: Создать директорию для данных СУБД
+  file:
+    path: "{{ work_dir }}/mysql/data"
+    state: directory
