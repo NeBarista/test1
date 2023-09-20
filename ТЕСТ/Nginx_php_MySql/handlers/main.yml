@@ -1,0 +1,3 @@
+---
+- name: Перезапустить контейнер Nginx
+  command: docker exec nginx_for_php_and_mysql /usr/sbin/nginx -s reload

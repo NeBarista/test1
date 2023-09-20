@@ -1,0 +1,5 @@
+---
+- name: Пример playbook'а для локального выполнения
+  hosts: localhost
+  roles:
+   - Nginx_php_MySql

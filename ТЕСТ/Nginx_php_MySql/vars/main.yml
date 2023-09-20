@@ -1,0 +1,17 @@
+---
+work_dir: ~/docker/nginx_php_mysql/
+nginx_image: nginx:latest
+nginx_ports: 8080:80
+nginx_conf_d_volume: ./nginx/conf.d
+server_name: _ # Замените на ваше доменное имя
+
+php_image: php:7.4-fpm
+php_volume: ./html
+php_fpm_socket: unix:/var/run/php-fpm.sock  # Путь к сокету PHP-FPM
+
+mysql_image: mysql:5.7
+mysql_root_password: root_password_here
+mysql_database: dbname_here
+mysql_user: dbuser_here
+mysql_password: dbuser_password_here
+mysql_data_volume: ./mysql/data

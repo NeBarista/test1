@@ -1,0 +1,41 @@
+---
+
+- name: Создать директорию
+  file:
+    path: "{{ work_dir }}"
+    state: directory
+  tags: create_directory
+
+- name: Создать Docker Compose файл
+  template:
+    src: docker-compose.j2
+    dest: "{{ work_dir }}/docker-compose.yml"
+
+- name: Создать директорию для конфигурационных файлов Nginx
+  file:
+    path: "{{ work_dir }}/nginx/conf.d"
+    state: directory
+  tags: create_directory
+
+- name: Создать конфиг для Nginx 
+  template:
+    src: nginx.conf.j2
+    dest: "{{ work_dir }}nginx/conf.d/default.conf"
+  notify: Перезапустить контейнер Nginx
+  ignore_errors: yes
+
+- name: Создать директорию для данных СУБД
+  file:
+    path: "{{ mysql_data_volume }}"
+    state: directory
+  tags: create_directory
+
+- name: Копировать файлы из роли в директорию на хосте
+  copy:
+    src: html
+    dest: "{{ work_dir }}"
+
+- name: Run docker-compose up
+  shell:
+    cmd: "docker compose up -d"
+    chdir: "{{ work_dir }}"
