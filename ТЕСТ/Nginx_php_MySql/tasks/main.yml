@@ -4,7 +4,7 @@
   file:
     path: "{{ work_dir }}"
     state: directory
-  tags: create_directory
+
 
 - name: Создать Docker Compose файл
   template:
@@ -15,7 +15,7 @@
   file:
     path: "{{ work_dir }}/nginx/conf.d"
     state: directory
-  tags: create_directory
+
 
 - name: Создать конфиг для Nginx 
   template:
@@ -28,7 +28,7 @@
   file:
     path: "{{ mysql_data_volume }}"
     state: directory
-  tags: create_directory
+
 
 - name: Копировать файлы из роли в директорию на хосте
   copy:
